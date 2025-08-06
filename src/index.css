@@ -2,41 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Health Educator Assessment Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors - Medical/Health Theme */
+    --background: 220 30% 98%;
+    --foreground: 210 15% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 15% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 15% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Medical Blue */
+    --primary: 200 90% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 200 80% 55%;
+    --primary-dark: 200 100% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Health Green */
+    --secondary: 145 65% 42%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 145 60% 52%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent - Warm Orange for highlights */
+    --accent: 25 95% 60%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 25 90% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Success - Green */
+    --success: 145 65% 42%;
+    --success-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Warning - Orange */
+    --warning: 35 90% 55%;
+    --warning-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --muted: 220 20% 95%;
+    --muted-foreground: 215 15% 45%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 200 90% 45%;
+
+    --radius: 0.75rem;
+
+    /* Assessment Specific Colors */
+    --wiscar-will: 270 70% 60%;
+    --wiscar-interest: 200 90% 45%;
+    --wiscar-skill: 145 65% 42%;
+    --wiscar-cognitive: 25 95% 60%;
+    --wiscar-ability: 300 50% 55%;
+    --wiscar-realworld: 180 60% 45%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 30% 98%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 2px 8px -2px hsl(var(--primary) / 0.1);
+    --shadow-medium: 0 4px 16px -4px hsl(var(--primary) / 0.15);
+    --shadow-strong: 0 8px 24px -8px hsl(var(--primary) / 0.2);
+    --shadow-glow: 0 0 32px hsl(var(--accent) / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +138,86 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Assessment Card Styles */
+  .assessment-card {
+    @apply bg-gradient-to-br from-white to-muted/30 border border-border/50 shadow-[var(--shadow-soft)] rounded-[var(--radius)];
+    transition: var(--transition-smooth);
+  }
+
+  .assessment-card:hover {
+    @apply shadow-[var(--shadow-medium)] border-primary/20;
+    transform: translateY(-2px);
+  }
+
+  /* Progress Bar */
+  .progress-gradient {
+    background: var(--gradient-primary);
+  }
+
+  /* WISCAR Radar Chart */
+  .wiscar-dimension {
+    transition: var(--transition-smooth);
+  }
+
+  /* Hero Section */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  /* Buttons */
+  .btn-assessment {
+    @apply bg-primary hover:bg-primary-dark text-primary-foreground font-medium px-6 py-3 rounded-[var(--radius)] shadow-[var(--shadow-soft)];
+    transition: var(--transition-smooth);
+  }
+
+  .btn-assessment:hover {
+    @apply shadow-[var(--shadow-medium)];
+    transform: translateY(-1px);
+  }
+
+  /* Score Cards */
+  .score-card {
+    @apply bg-white border border-border/50 rounded-[var(--radius)] p-6 shadow-[var(--shadow-soft)];
+    transition: var(--transition-smooth);
+  }
+
+  .score-card:hover {
+    @apply shadow-[var(--shadow-medium)];
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
   }
 }
